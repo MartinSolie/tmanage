@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="311.0" prefWidth="275.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="tmanage.MainController">
+  <children>
+    <VBox alignment="CENTER" layoutX="10.0" layoutY="7.0" prefHeight="290.0" prefWidth="255.0" spacing="20.0">
+      <children>
+        <Text fx:id="timeText" blendMode="DARKEN" fill="#41cc00" fontSmoothingType="GRAY" strikethrough="false" stroke="BLACK" strokeDashOffset="5.0" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="0.7" text="00:00:00" underline="false">
+          <font>
+            <Font name="DejaVu Sans ExtraLight" size="48.0" />
+          </font>
+        </Text>
+        <HBox prefHeight="21.0" prefWidth="67.0">
+          <children>
+            <Button mnemonicParsing="false" onMouseClicked="#handleStartButtonPressed" text="&gt;" />
+            <Button mnemonicParsing="false" onMouseClicked="#handlePauseButtonPressed" text="||" />
+          </children>
+        </HBox>
+        <ChoiceBox fx:id="tasksList" prefWidth="191.0">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Создание UI" />
+              <String fx:value="Создание интерфейсов" />
+              <String fx:value="Настройка fxml" />
+            </FXCollections>
+          </items>
+        </ChoiceBox>
+        <HBox alignment="CENTER" prefHeight="28.0" prefWidth="292.0">
+          <children>
+            <ToggleButton disable="true" mnemonicParsing="false" selected="true" text="Задача" visible="true">
+              <toggleGroup>
+                <ToggleGroup fx:id="toggleGroup" />
+              </toggleGroup>
+            </ToggleButton>
+            <ToggleButton disable="true" mnemonicParsing="false" text="Работа" toggleGroup="$toggleGroup" visible="true" />
+            <ToggleButton disable="true" mnemonicParsing="false" text="Отдых" toggleGroup="$toggleGroup" />
+          </children>
+        </HBox>
+        <Button mnemonicParsing="false" text="Статистика" visible="false" />
+        <HBox alignment="BOTTOM_RIGHT" prefHeight="75.0" prefWidth="292.0">
+          <children>
+            <Button mnemonicParsing="false" onMouseClicked="#handleListButtonPressed" text="Список" textOverrun="ELLIPSIS" />
+            <Button disable="true" mnemonicParsing="false" text="Настройки" visible="true" />
+          </children>
+        </HBox>
+      </children>
+      <padding>
+        <Insets top="20.0" />
+      </padding>
+    </VBox>
+  </children>
+</AnchorPane>

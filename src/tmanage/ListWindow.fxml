@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="367.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="tmanage.ListWindowController">
+  <children>
+    <TabPane layoutX="14.0" layoutY="14.0" prefHeight="372.0" prefWidth="339.0" tabClosingPolicy="UNAVAILABLE">
+      <tabs>
+        <Tab text="Заказчики">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <Separator layoutX="0.0" layoutY="305.0" prefWidth="346.0" />
+                <ListView fx:id="customersListView" layoutX="0.0" layoutY="0.0" prefHeight="305.0" prefWidth="339.0" />
+                <Button layoutX="302.0" layoutY="307.0" minWidth="21.0" mnemonicParsing="false" onMouseClicked="#handleCustomerAddButtonPressed" prefHeight="28.0" prefWidth="35.0" text="+" />
+                <Label id="customerLabe" fx:id="customerLabel" layoutX="14.0" layoutY="309.0" text="e-mail" />
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab text="Компании">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <Separator layoutX="0.0" layoutY="305.0" prefWidth="352.9999000000025" />
+                <ListView fx:id="companiesListView" layoutX="0.0" layoutY="0.0" prefHeight="305.0" prefWidth="339.0" />
+                <Button layoutX="302.0" layoutY="307.0" minWidth="34.0" mnemonicParsing="false" onMouseClicked="#handleCompanyAddButtonPressed" prefHeight="28.0" prefWidth="35.0" text="+" />
+                <Label fx:id="companyLabel" layoutX="14.0" layoutY="309.0" text="e-mail" />
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab text="Проекты">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <Separator layoutX="0.0" layoutY="305.0" prefWidth="339.0" />
+                <ListView fx:id="projectsListView" layoutX="0.0" layoutY="0.0" onMouseClicked="#handleProjectListPressed" prefHeight="305.0" prefWidth="339.0" />
+                <Button layoutX="302.0" layoutY="307.0" mnemonicParsing="false" onMouseClicked="#handleProjectAddButtonPressed" prefHeight="28.0" prefWidth="35.0" text="+" />
+                <Label fx:id="projectLabel" layoutX="14.0" layoutY="307.0" text="dead line" />
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+      </tabs>
+    </TabPane>
+  </children>
+</AnchorPane>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import tmanage.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="320.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="tmanage.NewProjectWindowController">
+  <children>
+    <VBox layoutX="0.0" layoutY="0.0" prefHeight="400.0" prefWidth="320.0" spacing="2.0">
+      <children>
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Заказчик:" />
+        <HBox prefHeight="23.0" prefWidth="320.0">
+          <children>
+            <ToggleButton fx:id="companyToggleButton" mnemonicParsing="false" selected="true" text="Компания">
+              <toggleGroup>
+                <ToggleGroup fx:id="custGroup" />
+              </toggleGroup>
+            </ToggleButton>
+            <ToggleButton id="companyToggleButton" fx:id="privateToggleButton" mnemonicParsing="false" text="Частное лицо" toggleGroup="$custGroup" />
+          </children>
+        </HBox>
+        <ChoiceBox fx:id="customersList">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Item 1" />
+              <String fx:value="Item 2" />
+              <String fx:value="Item 3" />
+            </FXCollections>
+          </items>
+        </ChoiceBox>
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Проект:" />
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Название:" />
+        <TextField id="nameTextField" fx:id="nameField" prefWidth="200.0" />
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Описание:" />
+        <TextArea id="descriptionField" fx:id="dField" prefWidth="200.0" wrapText="true" />
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Срок сдачи:" />
+        <TextField fx:id="deadLine" prefWidth="200.0" />
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ставка:" />
+        <TextField fx:id="salaryField" maxWidth="-Infinity" prefWidth="79.0" />
+        <HBox alignment="BOTTOM_RIGHT" prefHeight="23.0" prefWidth="320.0" spacing="15.0">
+          <children>
+            <Button fx:id="addButton" mnemonicParsing="false" onMouseClicked="#handleAddButtonPressed" text="Добавить" />
+            <Button fx:id="cancelButton" mnemonicParsing="false" onMouseClicked="#handleCancelButtonPressed" text="Отмена" />
+          </children>
+          <padding>
+            <Insets right="10.0" />
+          </padding>
+        </HBox>
+      </children>
+    </VBox>
+  </children>
+</AnchorPane>

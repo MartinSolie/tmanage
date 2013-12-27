@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="357.0" prefWidth="320.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="tmanage.NewCustomerWindowController">
+  <children>
+    <VBox layoutX="0.0" layoutY="0.0" prefHeight="357.0" prefWidth="320.0">
+      <children>
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Фамилия" />
+        <TextField fx:id="surnameField" prefWidth="200.0" />
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Имя" />
+        <TextField fx:id="nameField" prefWidth="200.0" />
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Отчество" />
+        <TextField fx:id="patronymicField" prefWidth="200.0" />
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="e-mail" />
+        <TextField fx:id="emailField" prefWidth="200.0" />
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Дополнительная информация" />
+        <TextArea fx:id="additionalField" prefWidth="200.0" wrapText="true" />
+        <HBox alignment="BOTTOM_RIGHT" prefHeight="16.0" prefWidth="320.0" spacing="15.0">
+          <children>
+            <Button fx:id="addButton" mnemonicParsing="false" onMouseClicked="#handleAddButtonPressed" text="Добавить" />
+            <Button fx:id="cancelButton" mnemonicParsing="false" onMouseClicked="#handleCancelButtonPressed" text="Отмена" />
+          </children>
+          <padding>
+            <Insets right="10.0" />
+          </padding>
+        </HBox>
+      </children>
+    </VBox>
+  </children>
+</AnchorPane>

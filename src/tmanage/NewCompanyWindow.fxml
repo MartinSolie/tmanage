@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="295.0" prefWidth="312.999977929685" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="tmanage.NewCompanyWindowController">
+  <children>
+    <VBox layoutX="14.0" layoutY="14.0" prefHeight="281.0" prefWidth="286.0">
+      <children>
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Название" />
+        <TextField fx:id="nameField" prefWidth="200.0" />
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="e-mail" />
+        <TextField fx:id="emailField" prefWidth="200.0" />
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Дополнительная информация" />
+        <TextArea fx:id="additionalField" prefWidth="200.0" wrapText="true" />
+        <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="286.0">
+          <children>
+            <Button fx:id="addButton" mnemonicParsing="false" onMouseClicked="#handleAddButtonPressed" text="Добавить" />
+            <Button fx:id="cancelButton" mnemonicParsing="false" onMouseClicked="#handleCancelButtonPressed" text="Отмена" />
+          </children>
+        </HBox>
+      </children>
+    </VBox>
+  </children>
+</AnchorPane>

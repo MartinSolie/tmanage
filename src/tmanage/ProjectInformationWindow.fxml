@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="381.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="tmanage.ProjectInformationWindowController">
+  <children>
+    <ScrollPane layoutX="1.0" layoutY="2.0" prefHeight="399.0" prefWidth="380.0">
+      <content>
+        <VBox prefHeight="399.0" prefWidth="365.0">
+          <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="22.0" prefWidth="365.0" spacing="25.0">
+              <children>
+                <ChoiceBox fx:id="projectsList" prefWidth="239.0">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Item 1" />
+                      <String fx:value="Item 2" />
+                      <String fx:value="Item 3" />
+                    </FXCollections>
+                  </items>
+                </ChoiceBox>
+                <Button fx:id="sendButton" disable="true" mnemonicParsing="false" text="Отправить" textAlignment="LEFT" />
+              </children>
+            </HBox>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Описание" />
+            <TextArea fx:id="descriptionField" disable="false" prefHeight="102.0" prefWidth="365.0" wrapText="true" />
+            <GridPane prefHeight="54.0" prefWidth="365.0">
+              <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ставка" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Срок сдачи" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Затраченное время" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <TextField fx:id="salaryField" disable="false" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <TextField fx:id="deadLineField" disable="false" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="spentTimeField" disable="false" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <TableView prefHeight="200.0" prefWidth="200.0">
+              <columns>
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="120.0" text="Задача" />
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="88.0" text="Завершена" />
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="155.0" text="Затраченное время" />
+              </columns>
+            </TableView>
+          </children>
+        </VBox>
+      </content>
+    </ScrollPane>
+  </children>
+</AnchorPane>
