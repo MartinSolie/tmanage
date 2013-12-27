@@ -55,7 +55,7 @@ public class MainController implements Initializable {
 
     @FXML
     private void handlePauseButtonPressed(MouseEvent event) {
-        timer.stop();               
+        timer.stop();        
     }
 
     @FXML
@@ -91,6 +91,7 @@ public class MainController implements Initializable {
             @Override
             public void changed(ObservableValue ov, Object t, Object t1) {
                 if (t1.toString().equalsIgnoreCase("Add new task")) {
+                    timer.stop();
                     Stage newTaskStage = new Stage();
                     Parent root;
                     try {
@@ -128,11 +129,7 @@ public class MainController implements Initializable {
                     }
                     Task nextTask = (Task) Storage.tasks.getTaskByName(t1.toString());
                     timeSpent = nextTask.getSpentTime();
-                    timer.start();
-                    //timer.scheduleAtFixedRate(tTask, 100, 1000);
-                    //save time of the previous
-                    //load time of the new
-                    //start counting
+                    timer.start();                    
                 }
             }
         });
@@ -148,9 +145,11 @@ public class MainController implements Initializable {
         this.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
-                //if(timer is working)
                 timer.stop();
-                //save to the corresponding Task class and to the DB;
+                if (!"Add new task".equalsIgnoreCase(tasksList.getSelectionModel().getSelectedItem().toString())){
+                    Task task = (Task) Storage.tasks.getTaskByName((String)tasksList.getSelectionModel().getSelectedItem());
+                    task.setSpentTime((int) timeSpent);               
+                }
             }
         });
     }
