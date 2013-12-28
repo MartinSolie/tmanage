@@ -7,3 +7,5 @@ tmanage
 Комментарии: https://github.com/MartinSolie/tmanage/issues/1
 
 Для работы приложения, на компьютере должен быть установлен MySQL сервер, работающий на localhost:3306. На сервере должна быть БД "time_management".
+
+[[Preview.png]]
