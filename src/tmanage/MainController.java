@@ -43,6 +43,7 @@ public class MainController implements Initializable {
     @FXML
     private ChoiceBox tasksList;
     private Stage stage;
+    private Stage listStage;
     //timer fields
     private long timeSpent;
     private SimpleStringProperty stime = new SimpleStringProperty();
@@ -60,19 +61,31 @@ public class MainController implements Initializable {
 
     @FXML
     private void handleListButtonPressed(MouseEvent event) {
-        Stage listStage = new Stage();
-        Parent root;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ListWindow.fxml"));
-            root = (Parent) loader.load();
-            Scene scene = new Scene(root);
+        if (listStage == null) {
+            listStage = new Stage();
+            Parent root;
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ListWindow.fxml"));
+                root = (Parent) loader.load();
+                Scene scene = new Scene(root);
 
-            ListWindowController controller = loader.<ListWindowController>getController();
+                ListWindowController controller = loader.<ListWindowController>getController();
 
-            listStage.setScene(scene);
-            listStage.show();
-        } catch (IOException ex) {
-            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+                listStage.setScene(scene);
+                listStage.show();
+
+                listStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                    @Override
+                    public void handle(WindowEvent event) {
+                        listStage = null;
+                    }
+                });
+            } catch (IOException ex) {
+                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            listStage.centerOnScreen();
+            listStage.toFront();
         }
     }
 
@@ -82,14 +95,16 @@ public class MainController implements Initializable {
         timeText.textProperty().bindBidirectional(stime);        
         stime.set("00:00:00");
 
-        //settin up choice box with tasks
+        //populating choice box with tasks
         final List<String> tasks = new ArrayList<String>();
-        tasks.add("Add new task");
+        tasks.add("Add new task"); //when this item will be choosen, NewTaskWindow will be opened
         tasks.addAll(Storage.tasks.getNames());
         tasksList.setItems(FXCollections.observableArrayList(tasks));
         tasksList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue ov, Object t, Object t1) {
+                
+                //if user choose "Add new task" item
                 if (t1.toString().equalsIgnoreCase("Add new task")) {
                     timer.stop();
                     Stage newTaskStage = new Stage();
@@ -103,21 +118,22 @@ public class MainController implements Initializable {
 
                         newTaskStage.setScene(scene);
                         newTaskStage.show();
-
-                        /*newTaskStage.setOnCloseRequest(new EventHandler<WindowEvent>(){
-                         @Override
-                         public void handle(WindowEvent t) {
-                         tasks.clear();
-                         tasks.add("Add new task");
-                         tasks.addAll(Storage.tasks.getNames());
-                         for (String name : tasks){
-                         System.out.println(name);
-                         }
-                         tasksList.setItems(FXCollections.observableArrayList(tasks));        
-                         }                            
-                         });*/
-
-
+                        
+                        newTaskStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                            @Override
+                            public void handle(WindowEvent event) {
+                                tasks.clear();
+                                tasks.add("Add new task");
+                                tasks.addAll(Storage.tasks.getNames());
+                                tasksList.getItems().clear();                                
+                                tasksList.setItems(FXCollections.observableArrayList(tasks));                                
+                            }
+                        });
+                        /*
+                        tasks.clear();
+                        tasks.add("Add new task");
+                        tasks.addAll(Storage.tasks.getNames());
+                        */
                     } catch (IOException ex) {
                         Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
                     }
