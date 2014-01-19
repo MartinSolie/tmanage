@@ -6,16 +6,24 @@ package tmanage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.CheckBoxTableCell;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 import tmanage.classes.Order;
+import tmanage.classes.Task;
 import tmanage.interfaces.IOrder;
 import tmanage.interfaces.ITask;
 
@@ -38,12 +46,44 @@ public class ProjectInformationWindowController implements Initializable {
     private TextField spentTimeField;
     @FXML
     private ChoiceBox projectsList;
+    @FXML
+    private TableView tasksTable;
+    @FXML
+    private TableColumn nameColumn;
+    @FXML
+    private TableColumn doneColumn;
+    @FXML
+    private TableColumn spentTimeColumn;
     
     private Order order;
+    
+    private ObservableList<ITask> tasks;
     
     public void initOrder(IOrder order){
         this.order = (Order) order;
         setOrderInformation();
+        tasks = FXCollections.observableArrayList(Storage.tasks.getTasksByProject(order.getProject()));
+        tasks.get(1).setCompleted(true);        
+        nameColumn.setCellValueFactory(
+            new PropertyValueFactory<Task,String>("name")
+        );        
+        doneColumn.setCellValueFactory(
+            new PropertyValueFactory<Task,Boolean>("completed")
+        );
+        //doneColumn.setCellFactory(CheckBoxTableCell.forTableColumn(doneColumn));
+        //doneColumn.setEditable(true);
+        spentTimeColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Task, String>, ObservableValue<String>>() {            
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Task, String> p) {
+                if (p.getValue()!=null){
+                    return new SimpleStringProperty(TimeConverter.getFormattedTime(p.getValue().getSpentTime()));
+                } else {
+                    return new SimpleStringProperty("NULL");
+                }
+            }
+        });
+        tasksTable.setEditable(true);
+        tasksTable.setItems(tasks);        
     }
     /**
      * Initializes the controller class.

@@ -13,4 +13,5 @@ public interface ITask {
     public int getProjectId();
     public String getName();
     public int getSpentTime();
+    public void setCompleted(boolean completed);
 }

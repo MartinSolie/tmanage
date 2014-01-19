@@ -99,7 +99,8 @@ public class Task implements ITask{
     public boolean isCompleted() {
         return completed;
     }
-
+    
+    @Override
     public void setCompleted(boolean completed) {
         this.completed = completed;
     }    
