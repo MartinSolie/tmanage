@@ -4,15 +4,22 @@
  */
 package tmanage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
@@ -21,6 +28,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import tmanage.classes.Order;
 import tmanage.classes.Task;
@@ -59,6 +69,28 @@ public class ProjectInformationWindowController implements Initializable {
     
     private ObservableList<ITask> tasks;
     
+    @FXML
+    private void handleSendButtonPressed(MouseEvent event) {
+        
+        Stage mailStage = new Stage();
+        Parent root;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MailWindow.fxml"));
+            root = (Parent) loader.load();
+            Scene scene = new Scene(root);
+
+            MailWindowController controller = loader.<MailWindowController>getController();
+            controller.initOrder(order);
+
+            mailStage.setScene(scene);
+            mailStage.show();           
+            
+        } catch (IOException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
     public void initOrder(IOrder order){
         this.order = (Order) order;
         setOrderInformation();
@@ -69,9 +101,7 @@ public class ProjectInformationWindowController implements Initializable {
         );        
         doneColumn.setCellValueFactory(
             new PropertyValueFactory<Task,Boolean>("completed")
-        );
-        //doneColumn.setCellFactory(CheckBoxTableCell.forTableColumn(doneColumn));
-        //doneColumn.setEditable(true);
+        );        
         spentTimeColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Task, String>, ObservableValue<String>>() {            
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Task, String> p) {

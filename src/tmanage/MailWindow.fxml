@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="332.0" prefWidth="330.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="tmanage.MailWindowController">
+  <children>
+    <VBox layoutX="115.0" layoutY="100.0" prefHeight="200.0" prefWidth="100.0" />
+    <VBox layoutX="0.0" layoutY="0.0" prefHeight="332.0" prefWidth="330.0">
+      <children>
+        <Label text="Получатель:" />
+        <TextField fx:id="recieverField" prefWidth="200.0" />
+        <Label text="Тема:" />
+        <TextField fx:id="topicField" prefWidth="200.0" />
+        <Label text="Сообщение:" />
+        <TextArea fx:id="messageField" prefHeight="200.0" prefWidth="330.0" wrapText="true" />
+        <HBox alignment="BOTTOM_RIGHT" prefHeight="31.0" prefWidth="330.0">
+          <children>
+            <Button fx:id="sendButton" mnemonicParsing="false" onMouseClicked="#handleSendButtonPressed" text="Отправить" />
+            <Button fx:id="cancelButton" mnemonicParsing="false" onMouseClicked="#handleCancelButtonPressed" text="Отмена" />
+          </children>
+        </HBox>
+      </children>
+    </VBox>
+  </children>
+</AnchorPane>

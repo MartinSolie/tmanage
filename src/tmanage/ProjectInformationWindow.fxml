@@ -12,7 +12,7 @@
   <children>
     <VBox layoutX="8.0" layoutY="1.0" prefHeight="399.0" prefWidth="365.0">
       <children>
-        <HBox alignment="CENTER_LEFT" prefHeight="22.0" prefWidth="365.0" spacing="25.0">
+        <HBox alignment="CENTER_LEFT" disable="false" prefHeight="22.0" prefWidth="365.0" spacing="25.0">
           <children>
             <ChoiceBox fx:id="projectsList" prefWidth="239.0">
               <items>
@@ -23,7 +23,7 @@
                 </FXCollections>
               </items>
             </ChoiceBox>
-            <Button fx:id="sendButton" disable="true" mnemonicParsing="false" text="Отправить" textAlignment="LEFT" />
+            <Button fx:id="sendButton" disable="false" mnemonicParsing="false" onMouseClicked="#handleSendButtonPressed" text="Отправить" textAlignment="LEFT" />
           </children>
         </HBox>
         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Описание" />
