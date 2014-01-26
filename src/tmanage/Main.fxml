@@ -36,20 +36,20 @@
         </ChoiceBox>
         <HBox alignment="CENTER" prefHeight="28.0" prefWidth="292.0">
           <children>
-            <ToggleButton disable="true" mnemonicParsing="false" selected="true" text="Задача" visible="true">
+            <ToggleButton disable="true" mnemonicParsing="false" selected="true" text="Задача" visible="false">
               <toggleGroup>
                 <ToggleGroup fx:id="toggleGroup" />
               </toggleGroup>
             </ToggleButton>
-            <ToggleButton disable="true" mnemonicParsing="false" text="Работа" toggleGroup="$toggleGroup" visible="true" />
-            <ToggleButton disable="true" mnemonicParsing="false" text="Отдых" toggleGroup="$toggleGroup" />
+            <ToggleButton disable="true" mnemonicParsing="false" text="Работа" toggleGroup="$toggleGroup" visible="false" />
+            <ToggleButton disable="true" mnemonicParsing="false" text="Отдых" toggleGroup="$toggleGroup" visible="false" />
           </children>
         </HBox>
-        <Button mnemonicParsing="false" text="Статистика" visible="false" />
+        <Button mnemonicParsing="false" text="Статистика" visible="true" />
         <HBox alignment="BOTTOM_RIGHT" prefHeight="75.0" prefWidth="292.0">
           <children>
             <Button mnemonicParsing="false" onMouseClicked="#handleListButtonPressed" text="Список" textOverrun="ELLIPSIS" />
-            <Button disable="true" mnemonicParsing="false" text="Настройки" visible="true" />
+            <Button disable="false" mnemonicParsing="false" text="Настройки" visible="true" />
           </children>
         </HBox>
       </children>

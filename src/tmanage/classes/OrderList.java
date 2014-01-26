@@ -104,6 +104,25 @@ public class OrderList implements IOrderList{
         }
         return null;        
     }
+    
+    public ArrayList<IOrder> getOrdersByCustomer (Customer customer){
+        ArrayList<IOrder> result;
+        result = new ArrayList<IOrder>();
+        if (customer instanceof PrivateCustomer){
+            for (IOrder order : personOrders){
+                if (order.getCustomer().getId() == customer.getId()){
+                    result.add(order);
+                }
+            }
+        } else {
+            for (IOrder order : companyOrders){
+                if (order.getCustomer().getId() == customer.getId()){
+                    result.add(order);
+                }
+            }
+        }
+        return result;
+    }
 
     @Override
     public void addProject(IProject project) throws SQLException {

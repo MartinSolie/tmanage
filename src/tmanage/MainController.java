@@ -88,7 +88,17 @@ public class MainController implements Initializable {
             listStage.toFront();
         }
     }
-
+    
+    @FXML
+    private void handleStatisticButtonPressed (MouseEvent event){
+        
+    }
+    
+    @FXML
+    private void handleSettingsButtonPressed (MouseEvent event){
+        
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //setting up timer

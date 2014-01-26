@@ -49,6 +49,8 @@ public class ProjectInformationWindowController implements Initializable {
     @FXML
     private TextArea descriptionField;
     @FXML
+    private TextField customerField;
+    @FXML
     private TextField salaryField;
     @FXML
     private TextField deadLineField;
@@ -92,10 +94,33 @@ public class ProjectInformationWindowController implements Initializable {
     }
     
     public void initOrder(IOrder order){
-        this.order = (Order) order;
-        setOrderInformation();
-        tasks = FXCollections.observableArrayList(Storage.tasks.getTasksByProject(order.getProject()));
-        tasks.get(1).setCompleted(true);        
+        this.order = (Order) order;        
+        setOrderInformation();        
+    }
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        customerField.setEditable(false);
+        descriptionField.setEditable(false);
+        salaryField.setEditable(false);
+        deadLineField.setEditable(false);
+        spentTimeField.setEditable(false);        
+        
+        //setting up choice box with projects
+        projectsList.setItems(FXCollections.observableArrayList(Storage.orders.getProjectNames()));        
+        projectsList.getSelectionModel().selectedItemProperty().addListener(
+                 new ChangeListener<String>(){
+                    @Override
+                    public void changed(ObservableValue<? extends String> ov, String old_val, String new_val){
+                        order = (Order) Storage.orders.getOrderByName(new_val);
+                        setOrderInformation();
+                    }
+                }
+        );
+        
+        //setting up table view with tasks from the project
         nameColumn.setCellValueFactory(
             new PropertyValueFactory<Task,String>("name")
         );        
@@ -112,32 +137,10 @@ public class ProjectInformationWindowController implements Initializable {
                 }
             }
         });
-        tasksTable.setEditable(true);
-        tasksTable.setItems(tasks);        
-    }
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {        
-        descriptionField.setEditable(false);
-        salaryField.setEditable(false);
-        deadLineField.setEditable(false);
-        spentTimeField.setEditable(false);
-        
-        projectsList.setItems(FXCollections.observableArrayList(Storage.orders.getProjectNames()));
-        
-        projectsList.getSelectionModel().selectedItemProperty().addListener(
-                 new ChangeListener<String>(){
-                    @Override
-                    public void changed(ObservableValue<? extends String> ov, String old_val, String new_val){
-                        order = (Order) Storage.orders.getOrderByName(new_val);
-                        setOrderInformation();
-                    }
-                }
-        );
+        //tasksTable.setEditable(true);
     }
     public void setOrderInformation(){
+        customerField.setText(order.getCustomer().getFullName());
         descriptionField.setText(order.getProject().getDescription());        
         salaryField.setText(String.valueOf(order.getSalary()));
         deadLineField.setText(order.getDeadLine().toString());
@@ -146,6 +149,8 @@ public class ProjectInformationWindowController implements Initializable {
             spentTime+=task.getSpentTime();
         }
         spentTimeField.setText(TimeConverter.getFormattedTime(spentTime));
-        projectsList.getSelectionModel().select(order.getName());
+        projectsList.getSelectionModel().select(order.getName());        
+        tasks = FXCollections.observableArrayList(Storage.tasks.getTasksByProject(order.getProject()));        
+        tasksTable.setItems(tasks);        
     }
 }

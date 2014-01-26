@@ -13,7 +13,6 @@ import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,8 +22,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import tmanage.classes.Customer;
 import tmanage.classes.Order;
-import tmanage.classes.Project;
 
 /**
  * FXML Controller class
@@ -139,6 +138,28 @@ public class ListWindowController implements Initializable {
             }
         } else {            
             projectLabel.setText(Storage.orders.getOrderByName((String)projectsListView.getSelectionModel().getSelectedItem()).getDeadLine().toString());
+        }
+    }
+    
+    @FXML
+    private void handleCustomerListPressed(MouseEvent event){
+        if (event.getClickCount()==2){
+            try {
+                Stage stage = new Stage();
+                Parent root;
+                FXMLLoader loader = new FXMLLoader (getClass().getResource("CustomerInformationWindow.fxml"));
+                root = (Parent)loader.load();
+                Scene scene = new Scene(root);
+                
+                CustomerInformationWindowController controller = loader.<CustomerInformationWindowController>getController();
+                controller.initCustomer((Customer)Storage.companies.getCustomerByName((String)companiesListView.getSelectionModel().getSelectedItem()));
+                
+                stage.setScene(scene);
+                stage.show();
+                
+            } catch (IOException ex) {
+                Logger.getLogger(ListWindowController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     
