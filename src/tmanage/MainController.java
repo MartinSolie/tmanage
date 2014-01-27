@@ -91,7 +91,21 @@ public class MainController implements Initializable {
     
     @FXML
     private void handleStatisticButtonPressed (MouseEvent event){
-        
+        Stage newStage = new Stage();
+        Parent root;
+        try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("StatisticWindow.fxml"));
+                root = (Parent) loader.load();
+                Scene scene = new Scene(root);
+
+                StatisticWindowController controller = loader.<StatisticWindowController>getController();
+                
+                newStage.setScene(scene);
+                newStage.show();
+                
+            } catch (IOException ex) {
+                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
     
     @FXML
@@ -113,10 +127,15 @@ public class MainController implements Initializable {
         tasksList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue ov, Object t, Object t1) {
+                if (t1 == null) return;
                 
                 //if user choose "Add new task" item
                 if (t1.toString().equalsIgnoreCase("Add new task")) {
-                    timer.stop();
+                    timer.stop();                    
+                    if (t != null && !t.toString().equalsIgnoreCase("Add new task")) {
+                        Task previousTask = (Task) Storage.tasks.getTaskByName(t.toString());
+                        previousTask.setSpentTime((int) timeSpent);
+                    }
                     Stage newTaskStage = new Stage();
                     Parent root;
                     try {
@@ -132,18 +151,22 @@ public class MainController implements Initializable {
                         newTaskStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                             @Override
                             public void handle(WindowEvent event) {
+                                System.out.println("Close request");
                                 tasks.clear();
+                                System.out.println("Cleared");
+                                for (String task : tasks){
+                                    System.out.println(task);
+                                }
                                 tasks.add("Add new task");
                                 tasks.addAll(Storage.tasks.getNames());
-                                tasksList.getItems().clear();                                
-                                tasksList.setItems(FXCollections.observableArrayList(tasks));                                
+                                System.out.println("Filled");
+                                for (String task : Storage.tasks.getNames()){
+                                    System.out.println(task);
+                                }
+                                //tasksList.getItems().clear();                                
+                                tasksList.setItems(FXCollections.observableArrayList(tasks));                                 
                             }
-                        });
-                        /*
-                        tasks.clear();
-                        tasks.add("Add new task");
-                        tasks.addAll(Storage.tasks.getNames());
-                        */
+                        });                        
                     } catch (IOException ex) {
                         Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -171,8 +194,8 @@ public class MainController implements Initializable {
         this.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
-                timer.stop();
-                if (!"Add new task".equalsIgnoreCase(tasksList.getSelectionModel().getSelectedItem().toString())){
+                timer.stop();                
+                if (tasksList.getSelectionModel().getSelectedItem()!=null && !"Add new task".equalsIgnoreCase(tasksList.getSelectionModel().getSelectedItem().toString())){
                     Task task = (Task) Storage.tasks.getTaskByName((String)tasksList.getSelectionModel().getSelectedItem());
                     task.setSpentTime((int) timeSpent);               
                 }

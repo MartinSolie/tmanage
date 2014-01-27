@@ -142,9 +142,22 @@ public class ListWindowController implements Initializable {
     }
     
     @FXML
-    private void handleCustomerListPressed(MouseEvent event){
+    private void handleCompanyListPressed(MouseEvent event){
         if (event.getClickCount()==2){
-            try {
+            showCustomerInformation ((Customer)Storage.companies.getCustomerByName((String)companiesListView.getSelectionModel().getSelectedItem()));
+        }
+    }
+    
+    @FXML
+    private void handlePersonListPressed (MouseEvent event){
+        if(event.getClickCount()==2){
+            showCustomerInformation ((Customer)Storage.persons.getCustomerByName((String)customersListView.getSelectionModel().getSelectedItem()));
+        }
+    }
+    
+    private void showCustomerInformation (Customer customer)
+    {
+        try {
                 Stage stage = new Stage();
                 Parent root;
                 FXMLLoader loader = new FXMLLoader (getClass().getResource("CustomerInformationWindow.fxml"));
@@ -152,7 +165,7 @@ public class ListWindowController implements Initializable {
                 Scene scene = new Scene(root);
                 
                 CustomerInformationWindowController controller = loader.<CustomerInformationWindowController>getController();
-                controller.initCustomer((Customer)Storage.companies.getCustomerByName((String)companiesListView.getSelectionModel().getSelectedItem()));
+                controller.initCustomer(customer);
                 
                 stage.setScene(scene);
                 stage.show();
@@ -160,7 +173,6 @@ public class ListWindowController implements Initializable {
             } catch (IOException ex) {
                 Logger.getLogger(ListWindowController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
     }
     
     public void initUserData(List<Order> orders){

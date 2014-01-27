@@ -89,7 +89,7 @@ public class TaskList implements ITasksList{
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(TaskList.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }        
         return false;
     }
 

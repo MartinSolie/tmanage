@@ -7,17 +7,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="374.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="tmanage.StatisticWindowController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="469.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="tmanage.StatisticWindowController">
   <children>
-    <VBox layoutX="0.0" layoutY="0.0" prefHeight="400.0" prefWidth="374.0">
+    <VBox layoutX="0.0" layoutY="0.0" prefHeight="400.0" prefWidth="469.0">
       <children>
-        <PieChart id="PieChart" legendSide="RIGHT" prefHeight="175.0" prefWidth="374.0" />
-        <TableView prefHeight="200.0" prefWidth="200.0">
-          <columns>
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="214.0" text="Проект" />
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="91.0" text="Отобразить" />
-          </columns>
-        </TableView>
+        <PieChart id="PieChart" fx:id="projectsChart" animated="true" legendSide="RIGHT" prefHeight="400.0" prefWidth="469.0" title="Time spent on projects" />
       </children>
     </VBox>
   </children>

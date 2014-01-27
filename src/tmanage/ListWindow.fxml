@@ -16,7 +16,7 @@
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
                 <Separator layoutX="0.0" layoutY="305.0" prefWidth="346.0" />
-                <ListView fx:id="customersListView" layoutX="0.0" layoutY="0.0" prefHeight="305.0" prefWidth="339.0" />
+                <ListView fx:id="customersListView" layoutX="0.0" layoutY="0.0" onMousePressed="#handlePersonListPressed" prefHeight="305.0" prefWidth="339.0" />
                 <Button layoutX="302.0" layoutY="307.0" minWidth="21.0" mnemonicParsing="false" onMouseClicked="#handleCustomerAddButtonPressed" prefHeight="28.0" prefWidth="35.0" text="+" />
                 <Label id="customerLabe" fx:id="customerLabel" layoutX="14.0" layoutY="309.0" text="e-mail" />
               </children>
@@ -28,7 +28,7 @@
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
                 <Separator layoutX="0.0" layoutY="305.0" prefWidth="352.9999000000025" />
-                <ListView fx:id="companiesListView" layoutX="0.0" layoutY="0.0" onMouseClicked="#handleCustomerListPressed" prefHeight="305.0" prefWidth="339.0" />
+                <ListView fx:id="companiesListView" layoutX="0.0" layoutY="0.0" onMouseClicked="#handleCompanyListPressed" prefHeight="305.0" prefWidth="339.0" />
                 <Button layoutX="302.0" layoutY="307.0" minWidth="34.0" mnemonicParsing="false" onMouseClicked="#handleCompanyAddButtonPressed" prefHeight="28.0" prefWidth="35.0" text="+" />
                 <Label fx:id="companyLabel" layoutX="14.0" layoutY="309.0" text="e-mail" />
               </children>

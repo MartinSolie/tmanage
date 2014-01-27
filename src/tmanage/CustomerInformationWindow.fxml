@@ -8,16 +8,16 @@
 
 <AnchorPane id="AnchorPane" prefHeight="451.0" prefWidth="319.9998779296875" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="tmanage.CustomerInformationWindowController">
   <children>
-    <VBox layoutX="0.0" layoutY="0.0" prefHeight="451.0000999999975" prefWidth="320.0">
+    <VBox layoutX="7.0" layoutY="0.0" prefHeight="452.0" prefWidth="306.0">
       <children>
         <Label text="Имя:" />
         <TextField fx:id="nameField" prefWidth="200.0" />
         <Label text="e-mail:" />
         <TextField fx:id="emailField" prefWidth="200.0" />
         <Label text="Дополнительный данные:" />
-        <TextArea fx:id="additionalInformationField" prefWidth="200.0" wrapText="true" />
+        <TextArea fx:id="additionalInformationField" prefHeight="146.0" prefWidth="320.0" wrapText="true" />
         <Label text="Проекты от заказчика:" />
-        <ListView fx:id="projectsList" prefHeight="200.0" prefWidth="200.0" />
+        <ListView fx:id="projectsList" prefHeight="146.0" prefWidth="320.0" />
       </children>
     </VBox>
   </children>

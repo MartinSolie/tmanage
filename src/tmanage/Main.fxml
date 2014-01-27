@@ -45,11 +45,11 @@
             <ToggleButton disable="true" mnemonicParsing="false" text="Отдых" toggleGroup="$toggleGroup" visible="false" />
           </children>
         </HBox>
-        <Button mnemonicParsing="false" text="Статистика" visible="true" />
+        <Button mnemonicParsing="false" onMousePressed="#handleStatisticButtonPressed" text="Статистика" visible="true" />
         <HBox alignment="BOTTOM_RIGHT" prefHeight="75.0" prefWidth="292.0">
           <children>
             <Button mnemonicParsing="false" onMouseClicked="#handleListButtonPressed" text="Список" textOverrun="ELLIPSIS" />
-            <Button disable="false" mnemonicParsing="false" text="Настройки" visible="true" />
+            <Button disable="false" mnemonicParsing="false" onMouseReleased="#handleSettingsButtonPressed" text="Настройки" visible="true" />
           </children>
         </HBox>
       </children>

@@ -1,7 +1,8 @@
 package tmanage.classes;
 
-import java.util.List;
+import tmanage.Storage;
 import tmanage.interfaces.IProject;
+import tmanage.interfaces.ITask;
 /**
  *
  * @author martin
@@ -49,7 +50,7 @@ public class Project implements IProject {
 
     public void setDescription(String description) {
         this.description = description;
-    }
+    }    
     
     public void print(){
         System.out.println("ID: "+this.id+"\nname: "+this.name+"\ndescritption: "+this.description);

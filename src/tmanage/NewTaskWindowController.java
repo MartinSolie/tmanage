@@ -44,10 +44,12 @@ public class NewTaskWindowController implements Initializable {
                 nameField.getText(), descriptionField.getText(), Integer.parseInt(targTimeField.getText()),
                 0, false);
         
-        Storage.tasks.addTask(task);
-        
-        Stage stage = (Stage)addButton.getScene().getWindow();
-        stage.close();
+        if(Storage.tasks.addTask(task)){        
+            Stage stage = (Stage)addButton.getScene().getWindow();
+            stage.close();
+        } else {
+            //messaging about the error
+        }
     }
     
     @FXML
