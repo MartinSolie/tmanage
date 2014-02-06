@@ -47,6 +47,8 @@ public class ProjectInformationWindowController implements Initializable {
     @FXML
     private Button sendButton;
     @FXML
+    private TextField nameField;
+    @FXML
     private TextArea descriptionField;
     @FXML
     private TextField customerField;
@@ -56,8 +58,8 @@ public class ProjectInformationWindowController implements Initializable {
     private TextField deadLineField;
     @FXML
     private TextField spentTimeField;
-    @FXML
-    private ChoiceBox projectsList;
+    //@FXML
+    //private ChoiceBox projectsList;
     @FXML
     private TableView tasksTable;
     @FXML
@@ -102,13 +104,16 @@ public class ProjectInformationWindowController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        /*
         customerField.setEditable(false);
         descriptionField.setEditable(false);
         salaryField.setEditable(false);
         deadLineField.setEditable(false);
-        spentTimeField.setEditable(false);        
+        spentTimeField.setEditable(false);      
+        */
         
         //setting up choice box with projects
+        /*
         projectsList.setItems(FXCollections.observableArrayList(Storage.orders.getProjectNames()));        
         projectsList.getSelectionModel().selectedItemProperty().addListener(
                  new ChangeListener<String>(){
@@ -119,14 +124,25 @@ public class ProjectInformationWindowController implements Initializable {
                     }
                 }
         );
-        
+        */
         //setting up table view with tasks from the project
         nameColumn.setCellValueFactory(
             new PropertyValueFactory<Task,String>("name")
         );        
-        doneColumn.setCellValueFactory(
-            new PropertyValueFactory<Task,Boolean>("completed")
-        );        
+        doneColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Task, String>, ObservableValue<String>>() {            
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Task, String> p) {
+                if (p.getValue()!=null){
+                    if (p.getValue().isCompleted()){
+                        return new SimpleStringProperty("Yes");
+                    } else {
+                        return new SimpleStringProperty("No");
+                    }                        
+                } else {
+                    return new SimpleStringProperty("NULL");
+                }
+            }
+        });        
         spentTimeColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Task, String>, ObservableValue<String>>() {            
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Task, String> p) {
@@ -140,6 +156,7 @@ public class ProjectInformationWindowController implements Initializable {
         //tasksTable.setEditable(true);
     }
     public void setOrderInformation(){
+        nameField.setText(order.getProject().getName());
         customerField.setText(order.getCustomer().getFullName());
         descriptionField.setText(order.getProject().getDescription());        
         salaryField.setText(String.valueOf(order.getSalary()));
@@ -149,7 +166,7 @@ public class ProjectInformationWindowController implements Initializable {
             spentTime+=task.getSpentTime();
         }
         spentTimeField.setText(TimeConverter.getFormattedTime(spentTime));
-        projectsList.getSelectionModel().select(order.getName());        
+        //projectsList.getSelectionModel().select(order.getName());        
         tasks = FXCollections.observableArrayList(Storage.tasks.getTasksByProject(order.getProject()));        
         tasksTable.setItems(tasks);        
     }

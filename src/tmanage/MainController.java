@@ -26,6 +26,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -44,6 +45,7 @@ public class MainController implements Initializable {
     private ChoiceBox tasksList;
     private Stage stage;
     private Stage listStage;
+    private Stage settingsStage;
     //timer fields
     private long timeSpent;
     private SimpleStringProperty stime = new SimpleStringProperty();
@@ -110,12 +112,60 @@ public class MainController implements Initializable {
     
     @FXML
     private void handleSettingsButtonPressed (MouseEvent event){
-        
+        if (settingsStage == null) {
+            settingsStage = new Stage();
+            Parent root;
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("SettingsWindow.fxml"));
+                root = (Parent) loader.load();
+                Scene scene = new Scene(root);
+
+                SettingsWindowController controller = loader.<SettingsWindowController>getController();
+
+                settingsStage.setScene(scene);
+                settingsStage.show();
+                
+                settingsStage.setOnHidden(new EventHandler<WindowEvent>() {
+                    @Override
+                    public void handle(WindowEvent event) {
+                        settingsStage = null;
+                    }
+                });
+            } catch (IOException ex) {
+                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            settingsStage.centerOnScreen();
+            settingsStage.toFront();
+        }
+    }
+    
+    @FXML
+    private void handleTasksListPressed(MouseEvent event){
+        if (event.getClickCount()==2){
+            try {
+                Stage stage = new Stage();
+                Parent root;
+                FXMLLoader loader = new FXMLLoader (getClass().getResource("TaskInformationWindow.fxml"));
+                root=(Parent)loader.load();
+                Scene scene = new Scene(root);
+                
+                TaskInformationWindowController controller = loader.<TaskInformationWindowController>getController();                
+                
+                
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(ListWindowController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //setting up timer
+        //Font.loadFont(Tmanage.class.getResource("Buff.ttf").toExternalForm(), 48);
+        timeText.setFont(Font.loadFont(Tmanage.class.getResource("Buff.ttf").toExternalForm(), 96));
         timeText.textProperty().bindBidirectional(stime);        
         stime.set("00:00:00");
 
@@ -148,23 +198,20 @@ public class MainController implements Initializable {
                         newTaskStage.setScene(scene);
                         newTaskStage.show();
                         
+                        newTaskStage.setOnHidden(new EventHandler<WindowEvent>() {
+                            @Override
+                            public void handle(WindowEvent event) {
+                                tasks.clear();                                
+                                tasks.add("Add new task");
+                                tasks.addAll(Storage.tasks.getNames());                                
+                                tasksList.setItems(FXCollections.observableArrayList(tasks));                                 
+                            }
+                        });
+                        
                         newTaskStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                             @Override
                             public void handle(WindowEvent event) {
-                                System.out.println("Close request");
-                                tasks.clear();
-                                System.out.println("Cleared");
-                                for (String task : tasks){
-                                    System.out.println(task);
-                                }
-                                tasks.add("Add new task");
-                                tasks.addAll(Storage.tasks.getNames());
-                                System.out.println("Filled");
-                                for (String task : Storage.tasks.getNames()){
-                                    System.out.println(task);
-                                }
-                                //tasksList.getItems().clear();                                
-                                tasksList.setItems(FXCollections.observableArrayList(tasks));                                 
+                                //add "Are you sure" dialog                         
                             }
                         });                        
                     } catch (IOException ex) {

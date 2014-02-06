@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="299.0" prefWidth="318.9998779296875" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="tmanage.SettingsWindowController">
+  <children>
+    <VBox layoutX="0.0" layoutY="0.0" prefHeight="299.0" prefWidth="319.0">
+      <children>
+        <TabPane prefHeight="260.0" prefWidth="319.0" tabClosingPolicy="UNAVAILABLE" tabMinWidth="130.0">
+          <tabs>
+            <Tab closable="false" text="Общие">
+              <content>
+                <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="317.0" prefWidth="319.0000999999975">
+                  <children>
+                    <VBox alignment="CENTER_LEFT" layoutX="0.0" layoutY="0.0" prefHeight="223.0" prefWidth="319.0" spacing="20.0">
+                      <children>
+                        <CheckBox mnemonicParsing="false" text="Запускать вместе с системой" />
+                        <CheckBox mnemonicParsing="false" text="Поверх остальных окон" />
+                        <Separator prefWidth="200.0" />
+                        <CheckBox mnemonicParsing="false" text="Напоминания" />
+                        <HBox alignment="CENTER" prefHeight="21.0" prefWidth="319.0">
+                          <children>
+                            <Label text="Интервал:" />
+                            <TextField prefWidth="75.0" />
+                          </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="21.0" prefWidth="319.0">
+                          <children>
+                            <Label text="Режим:" />
+                            <ToggleButton mnemonicParsing="false" text="Строгий" />
+                            <ToggleButton mnemonicParsing="false" text="Свободный" />
+                          </children>
+                        </HBox>
+                      </children>
+                      <padding>
+                        <Insets left="5.0" />
+                      </padding>
+                    </VBox>
+                  </children>
+                </AnchorPane>
+              </content>
+            </Tab>
+            <Tab closable="false" text="E-mail">
+              <content>
+                <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="246.0" prefWidth="319.0">
+                  <children>
+                    <GridPane alignment="CENTER" layoutX="14.0" layoutY="28.0" prefHeight="167.0" prefWidth="291.0">
+                      <children>
+                        <Label text="e-mail:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                        <Label text="Пароль:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                        <Label text="SMTP порт:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                        <Label text="Хост:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                        <TextField fx:id="emailField" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                        <TextField fx:id="smtpPortField" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="hostField" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <PasswordField fx:id="passwordField" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                      </children>
+                      <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="146.0" minWidth="10.0" prefWidth="77.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="214.0" minWidth="10.0" prefWidth="214.0" />
+                      </columnConstraints>
+                      <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      </rowConstraints>
+                    </GridPane>
+                  </children>
+                </AnchorPane>
+              </content>
+            </Tab>
+          </tabs>
+        </TabPane>
+        <HBox alignment="CENTER_RIGHT" prefHeight="43.9998779296875" prefWidth="319.0">
+          <children>
+            <Button fx:id="saveButton" mnemonicParsing="false" onMouseClicked="#handleSaveButtonPressed" text="Сохранить" />
+            <Button fx:id="cancelButton" mnemonicParsing="false" onMouseClicked="#handleCancelButtonPressed" text="Отмена" />
+          </children>
+        </HBox>
+      </children>
+    </VBox>
+  </children>
+</AnchorPane>

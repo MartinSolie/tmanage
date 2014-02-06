@@ -45,7 +45,7 @@ public class NewTaskWindowController implements Initializable {
                 0, false);
         
         if(Storage.tasks.addTask(task)){        
-            Stage stage = (Stage)addButton.getScene().getWindow();
+            Stage stage = (Stage)addButton.getScene().getWindow();            
             stage.close();
         } else {
             //messaging about the error

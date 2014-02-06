@@ -8,10 +8,14 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  *
@@ -34,6 +38,7 @@ public class Tmanage extends Application {
         DBLoader.loadPrivateCustomers();
         DBLoader.loadCompanyCustomers();
         DBLoader.loadTasks();
+        Font.loadFont(Tmanage.class.getResource("Buff.ttf").toExternalForm(), 48);
         
         //initializing main window
         Parent root;
@@ -45,6 +50,14 @@ public class Tmanage extends Application {
             MainController controller = loader.<MainController>getController();            
             controller.initUserData(stage);
             stage.setScene(scene);
+            
+            stage.setOnHidden(new EventHandler<WindowEvent>() {
+                            @Override
+                            public void handle(WindowEvent event) {
+                                Platform.exit();
+                            }
+                        });          
+            
             stage.show();
         } catch (IOException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
