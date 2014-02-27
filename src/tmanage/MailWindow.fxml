@@ -12,7 +12,7 @@
     <VBox layoutX="0.0" layoutY="0.0" prefHeight="332.0" prefWidth="330.0">
       <children>
         <Label text="Получатель:" />
-        <TextField fx:id="recieverField" prefWidth="200.0" />
+        <TextField id="recieverField" fx:id="receiverField" prefWidth="200.0" />
         <Label text="Тема:" />
         <TextField fx:id="topicField" prefWidth="200.0" />
         <Label text="Сообщение:" />
