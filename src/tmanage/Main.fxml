@@ -18,7 +18,7 @@
           <children>
             <Text fx:id="timeText" blendMode="DARKEN" boundsType="LOGICAL" fill="#41cc00" fontSmoothingType="GRAY" scaleX="1.0668986011451764" scaleY="1.0" strikethrough="false" stroke="BLACK" strokeDashOffset="5.0" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="0.7" text="00:00:00" underline="false" HBox.hgrow="NEVER">
               <font>
-                <Font name="DejaVu Sans ExtraLight" size="48.0" />
+                <Font size="48.0" />
               </font>
             </Text>
             <VBox minWidth="55.0" prefHeight="56.0" prefWidth="100.0">

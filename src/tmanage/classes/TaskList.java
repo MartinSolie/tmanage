@@ -94,10 +94,78 @@ public class TaskList implements ITasksList{
     }
 
     @Override
-    public boolean deleteTask(int taskId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean deleteTask(ITask task) {        
+        Connection connection = DBConnector.getConnection();
+        PreparedStatement deleteTask;
+        try {
+            deleteTask = connection.prepareStatement("delete from time_management.Tasks where id = ?");                    
+            deleteTask.setInt(1, task.getId());            
+
+            if (deleteTask.executeUpdate() == 0) {
+                System.out.println("Error deleting task!");
+                return false;
+            } else {
+                System.out.println("Task deleted succesfully");
+            }
+
+            deleteTask.close();
+            
+            names.remove(task.getName());
+            tasks.remove((Task)task);            
+
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(TaskList.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
+    @Override
+    public boolean updateTask(ITask t, String newName, String newDescription, boolean completed){
+        Connection connection = DBConnector.getConnection();
+        PreparedStatement updateTask;
+        Task task = (Task)t;
+        /*  UPDATE [LOW_PRIORITY] [IGNORE] table_reference
+            SET col_name1={expr1|DEFAULT} [, col_name2={expr2|DEFAULT}] ...
+            [WHERE where_condition]
+            [ORDER BY ...]
+            [LIMIT row_count]*/
+        try {
+            updateTask = connection.prepareStatement("update time_management.Tasks "
+                                                        + "set name = ?, "
+                                                        + "description = ?, "                                                        
+                                                        + "completed = ? "
+                                                        + "where id = ?; ");                    
+            updateTask.setString(1, newName);
+            updateTask.setString(2, newDescription);
+            updateTask.setBoolean(3, completed);
+            updateTask.setInt (4, task.getId());
+            
+            if (updateTask.executeUpdate() == 0) {
+                System.out.println("Error updating task!");
+                return false;
+            } else {
+                System.out.println("Task updated succesfully");
+            }
+
+            updateTask.close();
+            
+            int index = names.indexOf(task.getName());
+            names.set(index, newName); 
+            
+            index = tasks.indexOf(task);
+            task.setName(newName);
+            task.setDescritption(newDescription);
+            task.setCompleted(completed);
+            tasks.set(index, task);
+            
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(TaskList.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
     @Override
     public void setTaskList(List<ITask> list) {
         this.tasks = list;

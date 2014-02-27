@@ -5,6 +5,7 @@
 package tmanage.interfaces;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,4 +20,5 @@ public interface IOrderList {
     public void addCompanyOrder (IOrder order);
     public void addPersonOrder (IOrder order);
     public void addProject (IProject project) throws SQLException;
+    public boolean deleteOrder (IOrder o, List<ITask> tasks);    
 }

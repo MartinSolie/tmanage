@@ -7,6 +7,8 @@ package tmanage;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -51,4 +53,15 @@ public class DBConnector {
     public static Connection getConnection(){
         return connection;
     }
+    
+    public static void closeConnection(){
+        if (connected){
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }        
+    }
+    
 }

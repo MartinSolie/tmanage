@@ -50,10 +50,13 @@ public class Tmanage extends Application {
             MainController controller = loader.<MainController>getController();            
             controller.initUserData(stage);
             stage.setScene(scene);
+            stage.setResizable(false);
+            stage.setTitle("tManage");
             
             stage.setOnHidden(new EventHandler<WindowEvent>() {
                             @Override
                             public void handle(WindowEvent event) {
+                                DBConnector.closeConnection();
                                 Platform.exit();
                             }
                         });          

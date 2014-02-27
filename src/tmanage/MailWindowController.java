@@ -15,8 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.apache.commons.mail.DefaultAuthenticator;
-import org.apache.commons.mail.Email;
-import org.apache.commons.mail.SimpleEmail;
+import org.apache.commons.mail.HtmlEmail;
 import tmanage.classes.Order;
 import tmanage.classes.Task;
 import tmanage.interfaces.IOrder;
@@ -51,11 +50,11 @@ public class MailWindowController implements Initializable {
     
     @FXML
     private void handleSendButtonPressed (MouseEvent event){
-        try {
+        try {/*
             Email email = new SimpleEmail();
             email.setSmtpPort(Settings.getPort());
             email.setAuthenticator(new DefaultAuthenticator(Settings.getLogin(),
-                    Settings.getPassword()));
+                    Settings.getPassword()));            
             //email.setDebug(true);
             email.setHostName(Settings.getHost());
             email.setFrom(Settings.getLogin());
@@ -64,7 +63,53 @@ public class MailWindowController implements Initializable {
             email.addTo(recieverField.getText());
             email.setTLS(true);
             email.send();
-            System.out.println("Mail sent!");
+            System.out.println("Mail sent!");*/
+             HtmlEmail email = new HtmlEmail();
+             email.setTLS(true);
+             email.setSmtpPort(Settings.getPort());
+             email.setAuthenticator(new DefaultAuthenticator(Settings.getLogin(),
+                    Settings.getPassword()));
+  email.setHostName(Settings.getHost());
+  email.addTo("antonymartynov@gmail.com");
+  email.setFrom(Settings.getLogin());
+  email.setSubject("Test email with inline image"); 
+  
+  // set the html message
+  email.setHtmlMsg("<html>\n" +
+"  <head>\n" +
+"    <script type=\"text/javascript\" src=\"https://www.google.com/jsapi\"></script>\n" +
+"    <script type=\"text/javascript\">\n" +
+"      google.load(\"visualization\", \"1\", {packages:[\"corechart\"]});\n" +
+"      google.setOnLoadCallback(drawChart);\n" +
+"      function drawChart() {\n" +
+"        var data = google.visualization.arrayToDataTable([\n" +
+"          ['Task', 'Hours per Day'],\n" +
+"          ['Work',     11],\n" +
+"          ['Eat',      2],\n" +
+"          ['Commute',  2],\n" +
+"          ['Watch TV', 2],\n" +
+"          ['Sleep',    7]\n" +
+"        ]);\n" +
+"\n" +
+"        var options = {\n" +
+"          title: 'My Daily Activities'\n" +
+"        };\n" +
+"\n" +
+"        var chart = new google.visualization.PieChart(document.getElementById('piechart'));\n" +
+"        chart.draw(data, options);\n" +
+"      }\n" +
+"    </script>\n" +
+"  </head>\n" +
+"  <body>\n" +
+"    <div id=\"piechart\" style=\"width: 900px; height: 500px;\"></div>\n" +
+"  </body>\n" +
+"</html>");
+
+  // set the alternative message
+  email.setTextMsg("Your email client does not support HTML messages");
+
+  // send the email
+  email.send();
         } catch (Exception e) {
             System.out.println("Exception : " + e);
         }

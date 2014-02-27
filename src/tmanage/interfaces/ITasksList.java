@@ -17,6 +17,7 @@ public interface ITasksList {
     public List<String> getNames();
     public List<ITask> getTasksByProject(IProject project);
     public void setTaskList(List<ITask> list);
-    public boolean addTask(ITask task);
-    public boolean deleteTask(int taskId);
+    public boolean addTask(ITask t);
+    public boolean deleteTask(ITask t);
+    public boolean updateTask(ITask t, String newName, String newDescription, boolean completed);
 }
